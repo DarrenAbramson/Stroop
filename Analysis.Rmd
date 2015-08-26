@@ -1,22 +1,85 @@
 ---
-title: "Stroop"
+title: "An Investigation into Stroop Data"
 author: "Darren Abramson"
 date: "August 24, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### 1. Variables
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+This report describes analysis of the data contained in [this file](https://www.google.com/url?q=https%3A%2F%2Ffaculty.washington.edu%2Fchudler%2Fjava%2Fready.html&sa=D&sntz=1&usg=AFQjCNGc_1cOHZy4iwBhM93xXvCImuQ1sQ). 
+
+First we read in the file to R and examine its structure.
 
 ```{r}
-summary(cars)
+stroop <- read.csv("stroopdata.csv", header=TRUE)
+str(stroop)
 ```
 
-You can also embed plots, for example:
+The dependent variable is time, measured in seconds, that it takes a person to read the colors that words are written in. The independent variable is the congruency between the color the word is printed in and the color the words says. As can be seen above, there are two values for the dependent variable: Congruent and Incongruent.
 
-```{r, echo=FALSE}
-plot(cars)
+
+
+### 2. Hypotheses
+
+Let the population mean for the congruent variable in time be $\mu_c$, and the population mean for the incongruent variable be $\mu_i$.
+
+The null hypothesis, $H_0$ says that $\mu_c = \mu_i$. The alternative hypothesis, $H_a$ says that either $\mu_c \neq \mu_i$; either $\mu_c > \mu_i$ or $\mu_i > \mu_c$.
+
+In investigating whether this is the case, it is appropriate to do a two-tailed t.test of paired observations. This test will allow us to calculate whether the difference means is attributable to sampling error. This test will allow us to specify a confidence interval for the difference in means between the conditions.
+
+### 3. Descriptive statistics
+
+R's summary function is well suited to quickly looking at statistics of a data set. 
+```{r}
+summary(stroop)
+```
+Some initial observations can be made. Sample mean $m_i > m_c$ by a large margin -- more than $50\%$ greater. This will be our first measure of central tendency: $m_i$ as a proportion of $m_c$, and the difference between the two.
+
+```{r}
+mean(stroop$Incongruent)/mean(stroop$Congruent)
+mean(stroop$Congruent) - mean(stroop$Incongruent)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+As a measure of variability, we can calculate the standard deviation of the difference.
+
+```{r}
+difference <- stroop$Congruent - stroop$Incongruent
+sd(difference)
+```
+Since standard deviations are measured in the same units as the independent variable here, we have cause to think that our results will be statistically significant. The sample is large, and the standard deviation of the difference is smaller than the difference in sample means. 
+
+Of course, this sort of speculation must be investigated using statistical techniques.
+
+### 4. Visualizations
+
+Here is a plot of the pairs of observations of each subject. I have included a  $45^{\circ}$ line.
+
+```{r}
+plot(stroop, ylim = c(5,35), xlim = c(5,35))
+abline(0,1)
+```
+
+Notice that this plot has its x and y axes scaled evenly. Therefore, clustering of the plot around the $45^{\circ}$ line would support $H_0$. Clustering above that line supports $H_A$ where $\mu_i > \mu_c$, and clustering below that line supports $H_A$ where $\mu_i < \mu_c$.
+
+The plot is... suggestive.
+
+### 5. Statistical test
+
+We now apply the test described in Section 2 above.
+
+```{r}
+t.test(stroop$Congruent, stroop$Incongruent, conf.level=.95)
+```
+The t value is far outside any critical values we might be interested in, with a p-value that is very close to 0. So, the effect is significant: we do expect $\mu_i > \mu_c$. Our experiment tells us something about linguistic perception and action in people!
+
+Notice that the effect is so strong that an interval with a ridiculously high confidence will still fail to contain a value of 0 for the difference, thus supporting $H_A$.
+
+```{r}
+t.test(stroop$Congruent, stroop$Incongruent, conf.level=.99999)
+```
+
+When sampling 24 people across the Incongruent and Congruent cases in the Stroop experiment, we would expect $m_i > m_c$ at least 99.999% of the time.
+
+### 6. Cause 
+
