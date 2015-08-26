@@ -83,3 +83,14 @@ When sampling 24 people across the Incongruent and Congruent cases in the Stroop
 
 ### 6. Cause 
 
+In the final summary of his 1935 paper 'Studies of Interference in Serial Verbal Reactions', Stroop says
+
+> The associations that have been [p. 660] formed between the word stimuli and the reading response are evidently more effective than those that have been formed between the color stimuli and the naming response. Since these associations are products of training, and since the difference in their strength corresponds roughly to the difference in training in reading words and naming colors, it seems reasonable to conclude that the difference in speed in reading names of colors and in naming colors may be satisfactorily accounted for by the difference in training in the two activities.
+
+In his original experiment, Stroop also presented uncolored words and just had subjects read them. There was no improvement in time when the words were printed in the congruent color. He therefore concluded that reading is something we're better trained to do than name colors. 
+
+In the incongruent case, Stroop is suggesting that our `stronger association' with reading is interfering with our ability to name colors, something we have a weaker association with.
+
+This is a behaviorist account according to which present behavior is a simple function of conditioning and past experience.
+
+Compelling evidence that this explanation is mistaken is showing that there is no significant difference between, say, expert color identifiers from the art or decorating industry and the general population in the Stroop experiment.
