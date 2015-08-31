@@ -120,32 +120,32 @@ abline(0,1)</code></pre>
 <div id="statistical-test" class="section level3">
 <h3>5. Statistical test</h3>
 <p>We now apply the test described in Section 2 above.</p>
-<pre class="r"><code>t.test(stroop$Congruent, stroop$Incongruent, conf.level=.95)</code></pre>
+<pre class="r"><code>t.test(stroop$Congruent, stroop$Incongruent, paired=TRUE, conf.level=.95)</code></pre>
 <pre><code>## 
-##  Welch Two Sample t-test
+##  Paired t-test
 ## 
 ## data:  stroop$Congruent and stroop$Incongruent
-## t = -6.5323, df = 42.434, p-value = 6.51e-08
+## t = -8.0207, df = 23, p-value = 4.103e-08
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -10.424698  -5.504885
+##  -10.019028  -5.910555
 ## sample estimates:
-## mean of x mean of y 
-##  14.05113  22.01592</code></pre>
+## mean of the differences 
+##               -7.964792</code></pre>
 <p>The t value is far outside any critical values we might be interested in, with a p-value that is very close to 0. So, the effect is significant: we do expect <span class="math">\(\mu_i &gt; \mu_c\)</span>. Our experiment tells us something about linguistic perception and action in people!</p>
 <p>Notice that the effect is so strong that an interval with a ridiculously high confidence will still fail to contain a value of 0 for the difference, thus supporting <span class="math">\(H_A\)</span>.</p>
-<pre class="r"><code>t.test(stroop$Congruent, stroop$Incongruent, conf.level=.99999)</code></pre>
+<pre class="r"><code>t.test(stroop$Congruent, stroop$Incongruent, paired=TRUE, conf.level=.99999)</code></pre>
 <pre><code>## 
-##  Welch Two Sample t-test
+##  Paired t-test
 ## 
 ## data:  stroop$Congruent and stroop$Incongruent
-## t = -6.5323, df = 42.434, p-value = 6.51e-08
+## t = -8.0207, df = 23, p-value = 4.103e-08
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 99.999 percent confidence interval:
-##  -14.076437  -1.853146
+##  -13.552037  -2.377546
 ## sample estimates:
-## mean of x mean of y 
-##  14.05113  22.01592</code></pre>
+## mean of the differences 
+##               -7.964792</code></pre>
 <p>When sampling 24 people across the Incongruent and Congruent cases in the Stroop experiment, we would expect <span class="math">\(m_i &gt; m_c\)</span> at least 99.999% of the time.</p>
 </div>
 <div id="cause" class="section level3">
@@ -155,7 +155,7 @@ abline(0,1)</code></pre>
 <p>The associations that have been [p. 660] formed between the word stimuli and the reading response are evidently more effective than those that have been formed between the color stimuli and the naming response. Since these associations are products of training, and since the difference in their strength corresponds roughly to the difference in training in reading words and naming colors, it seems reasonable to conclude that the difference in speed in reading names of colors and in naming colors may be satisfactorily accounted for by the difference in training in the two activities.</p>
 </blockquote>
 <p>In his original experiment, Stroop also presented uncolored words and just had subjects read them. There was no improvement in time when the words were printed in the congruent color. He therefore concluded that reading is something we’re better trained to do than name colors.</p>
-<p>In the incongruent case, Stroop is suggesting that our `stronger association’ with reading is interfering with our ability to name colors, something we have a weaker association with.</p>
+<p>In the incongruent case, Stroop is suggesting that our ‘stronger association’ with reading is interfering with our ability to name colors, something we have a weaker association with.</p>
 <p>This is a behaviorist account according to which present behavior is a simple function of conditioning and past experience.</p>
 <p>Compelling evidence that this explanation is mistaken is showing that there is no significant difference between, say, expert color identifiers from the art or decorating industry and the general population in the Stroop experiment.</p>
 </div>
