@@ -69,14 +69,14 @@ The plot is... suggestive.
 We now apply the test described in Section 2 above.
 
 ```{r}
-t.test(stroop$Congruent, stroop$Incongruent, conf.level=.95)
+t.test(stroop$Congruent, stroop$Incongruent, paired=TRUE, conf.level=.95)
 ```
 The t value is far outside any critical values we might be interested in, with a p-value that is very close to 0. So, the effect is significant: we do expect $\mu_i > \mu_c$. Our experiment tells us something about linguistic perception and action in people!
 
 Notice that the effect is so strong that an interval with a ridiculously high confidence will still fail to contain a value of 0 for the difference, thus supporting $H_A$.
 
 ```{r}
-t.test(stroop$Congruent, stroop$Incongruent, conf.level=.99999)
+t.test(stroop$Congruent, stroop$Incongruent, paired=TRUE, conf.level=.99999)
 ```
 
 When sampling 24 people across the Incongruent and Congruent cases in the Stroop experiment, we would expect $m_i > m_c$ at least 99.999% of the time.
@@ -89,7 +89,7 @@ In the final summary of his 1935 paper 'Studies of Interference in Serial Verbal
 
 In his original experiment, Stroop also presented uncolored words and just had subjects read them. There was no improvement in time when the words were printed in the congruent color. He therefore concluded that reading is something we're better trained to do than name colors. 
 
-In the incongruent case, Stroop is suggesting that our `stronger association' with reading is interfering with our ability to name colors, something we have a weaker association with.
+In the incongruent case, Stroop is suggesting that our 'stronger association' with reading is interfering with our ability to name colors, something we have a weaker association with.
 
 This is a behaviorist account according to which present behavior is a simple function of conditioning and past experience.
 
